@@ -1,7 +1,8 @@
 """
-Módulo de Entidades Base y Gestión de Clientes
-Proyecto: Sistema Integral de Gestión - Software FJ
-Autor: Daniel Esteban Jaramillo Ruiz
+Nombre del Estudiante: Daniel Esteban Jaramillo Ruiz
+Programa: Ingeniería de Sistemas
+Código Fuente: Autoría Propia
+Fase 4 - Sistema Integral de Gestión de Reservas (Software FJ)
 """
 
 from abc import ABC, abstractmethod
@@ -9,7 +10,7 @@ from excepciones import DatosInvalidosError
 
 
 class EntidadSistema(ABC):
-    """Clase abstracta base que define la estructura común de las entidades en Software FJ."""
+    """Clase abstracta que obliga a todas las entidades a tener un ID y un resumen."""
 
     def __init__(self, id_entidad: str):
         if not id_entidad or not str(id_entidad).strip():
@@ -22,16 +23,15 @@ class EntidadSistema(ABC):
 
     @abstractmethod
     def obtener_resumen(self) -> str:
-        """Método obligatorio que cada clase hija debe implementar para describirse."""
+        """Devuelve una descripción corta con los datos principales del objeto."""
         pass
 
 
 class Cliente(EntidadSistema):
-    """Representa un cliente de Software FJ con encapsulación y validación de datos personales."""
+    """Modela a un cliente validando sus datos personales desde los setters."""
 
     def __init__(self, id_cliente: str, nombre: str, correo: str, telefono: str):
         super().__init__(id_cliente)
-        # Usamos los setters para aplicar todas las validaciones desde la creación
         self.nombre = nombre
         self.correo = correo
         self.telefono = telefono

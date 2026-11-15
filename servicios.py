@@ -1,7 +1,8 @@
 """
-Módulo de Servicios Especializados (Herencia, Polimorfismo y Sobrecarga)
-Proyecto: Sistema Integral de Gestión - Software FJ
-Autor: Daniel Esteban Jaramillo Ruiz
+Nombre del Estudiante: Daniel Esteban Jaramillo Ruiz
+Programa: Ingeniería de Sistemas
+Código Fuente: Autoría Propia
+Fase 4 - Sistema Integral de Gestión de Reservas (Software FJ)
 """
 
 from abc import abstractmethod
@@ -10,7 +11,7 @@ from excepciones import DatosInvalidosError, ServicioNoDisponibleError
 
 
 class Servicio(EntidadSistema):
-    """Clase abstracta que modela cualquier servicio ofrecido por Software FJ."""
+    """Clase abstracta base para los servicios que ofrece Software FJ."""
 
     def __init__(self, id_servicio: str, nombre: str, tarifa_base: float, disponible: bool = True):
         super().__init__(id_servicio)
@@ -41,30 +42,27 @@ class Servicio(EntidadSistema):
 
     @abstractmethod
     def validar_parametros(self, duracion: int) -> None:
-        """Verifica disponibilidad y reglas particulares antes de cotizar o reservar."""
+        """Revisa disponibilidad y límites de tiempo propios de cada servicio."""
         pass
 
     @abstractmethod
     def calcular_costo(self, duracion: int, descuento: float = 0.0, aplicar_iva: bool = True) -> float:
-        """
-        Método polimórfico y con sobrecarga simulada mediante parámetros opcionales
-        para calcular el valor total según el tipo de servicio.
-        """
+        """Calcula el valor final del servicio aplicando reglas propias, descuento e IVA."""
         pass
 
     def _aplicar_ajustes_financieros(self, subtotal: float, descuento: float, aplicar_iva: bool) -> float:
-        """Aplica descuentos e IVA verificando que los porcentajes sean coherentes."""
+        """Valida el porcentaje de descuento y suma el 19% de IVA si corresponde."""
         if descuento < 0 or descuento > 50:
             raise DatosInvalidosError("El porcentaje de descuento debe estar entre 0% y 50%.")
 
         total = subtotal * (1 - (descuento / 100))
         if aplicar_iva:
-            total *= 1.19  # IVA del 19%
+            total *= 1.19
         return round(total, 2)
 
 
 class ReservaSala(Servicio):
-    """Servicio especializado para alquiler por horas de salas de desarrollo o juntas."""
+    """Alquiler de salas de trabajo o reuniones cobrado por horas."""
 
     def __init__(self, id_servicio: str, nombre: str, tarifa_hora: float, capacidad: int, disponible: bool = True):
         super().__init__(id_servicio, nombre, tarifa_hora, disponible)
@@ -81,7 +79,7 @@ class ReservaSala(Servicio):
     def calcular_costo(self, duracion: int, descuento: float = 0.0, aplicar_iva: bool = True) -> float:
         self.validar_parametros(duracion)
         subtotal = self._tarifa_base * duracion
-        # Si reservan más de 4 horas se aplica un recargo fijo de limpieza y soporte ($25.000)
+        # Si pasa de 4 horas se cobra un fijo de $25.000 por limpieza y soporte
         if duracion > 4:
             subtotal += 25000.0
         return self._aplicar_ajustes_financieros(subtotal, descuento, aplicar_iva)
@@ -92,7 +90,7 @@ class ReservaSala(Servicio):
 
 
 class AlquilerEquipo(Servicio):
-    """Servicio especializado para préstamo de hardware y estaciones de trabajo por días."""
+    """Préstamo de hardware por días con control de unidades en inventario."""
 
     def __init__(self, id_servicio: str, nombre: str, tarifa_dia: float, stock_disponible: int):
         super().__init__(id_servicio, nombre, tarifa_dia, disponible=(stock_disponible > 0))
@@ -122,7 +120,7 @@ class AlquilerEquipo(Servicio):
 
     def calcular_costo(self, duracion: int, descuento: float = 0.0, aplicar_iva: bool = True) -> float:
         self.validar_parametros(duracion)
-        # Seguro obligatorio del 5% sobre el valor base del alquiler
+        # Incluye un 5% adicional por póliza de seguro del equipo
         subtotal = (self._tarifa_base * duracion) * 1.05
         return self._aplicar_ajustes_financieros(subtotal, descuento, aplicar_iva)
 
@@ -131,7 +129,7 @@ class AlquilerEquipo(Servicio):
 
 
 class AsesoriaEspecializada(Servicio):
-    """Servicio especializado para consultoría técnica en arquitectura y desarrollo."""
+    """Consultoría técnica por horas en áreas específicas de desarrollo."""
 
     def __init__(self, id_servicio: str, nombre: str, tarifa_hora: float, especialidad: str, disponible: bool = True):
         super().__init__(id_servicio, nombre, tarifa_hora, disponible)

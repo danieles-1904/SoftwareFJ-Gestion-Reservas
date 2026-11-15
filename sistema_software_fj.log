@@ -1,0 +1,31 @@
+2026-11-15 13:57:33 | INFO | INICIO DE EJECUCIÓN DEL SISTEMA SOFTWARE FJ
+2026-11-15 13:57:33 | INFO | Cliente registrado: Cliente [CLI-01]: Laura Gómez | Correo: laura.gomez@empresa.co | Tel: 3104567890
+2026-11-15 13:57:33 | INFO | Cliente registrado: Cliente [CLI-02]: Carlos Méndez | Correo: cmendez@techmail.com | Tel: 3009876543
+2026-11-15 13:57:33 | INFO | Cliente registrado: Cliente [CLI-03]: Andrés Restrepo | Correo: andres.r@innovasoft.co | Tel: 6043214567
+2026-11-15 13:57:33 | ERROR | Error al registrar cliente [CLI-ERR1]: El correo 'pedro.sin.arroba.com' no tiene un formato válido.
+2026-11-15 13:57:33 | ERROR | Error al registrar cliente [CLI-ERR2]: El teléfono debe contener solo números y mínimo 7 dígitos.
+2026-11-15 13:57:33 | INFO | Servicio habilitado: Sala [SRV-S01]: Sala Innovación Ágil | Cap: 10 pers. | $80,000/h (Disponible)
+2026-11-15 13:57:33 | INFO | Servicio habilitado: Equipo [SRV-E01]: Workstation RTX 4090 | Stock: 1 unid. | $120,000/día
+2026-11-15 13:57:33 | INFO | Servicio habilitado: Asesoría [SRV-A01]: Consultoría Cloud y Microservicios (Arquitectura) | $150,000/h (Agenda abierta)
+2026-11-15 13:57:33 | ERROR | Error al crear servicio inválido: La tarifa base del servicio debe ser mayor a cero.
+2026-11-15 13:57:33 | INFO | Iniciando confirmación para reserva RES-101...
+2026-11-15 13:57:33 | INFO | Reserva RES-101 CONFIRMADA | Cliente: Laura Gómez | Servicio: Sala Innovación Ágil | Total: $455,175.00
+2026-11-15 13:57:33 | INFO | Cierre de validación en RES-101 con estado: CONFIRMADA
+2026-11-15 13:57:33 | INFO | Iniciando confirmación para reserva RES-102...
+2026-11-15 13:57:33 | INFO | Reserva RES-102 CONFIRMADA | Cliente: Carlos Méndez | Servicio: Workstation RTX 4090 | Total: $464,820.00
+2026-11-15 13:57:33 | INFO | Cierre de validación en RES-102 con estado: CONFIRMADA
+2026-11-15 13:57:33 | INFO | Iniciando confirmación para reserva RES-103...
+2026-11-15 13:57:33 | INFO | Cierre de validación en RES-103 con estado: PENDIENTE
+2026-11-15 13:57:33 | ERROR | Fallo en reserva [RES-103]: Fallo al confirmar reserva RES-103 para 'Workstation RTX 4090'. | Causa raíz: El equipo 'Workstation RTX 4090' está agotado en inventario.
+2026-11-15 13:57:33 | INFO | Iniciando confirmación para reserva RES-104...
+2026-11-15 13:57:33 | INFO | Cierre de validación en RES-104 con estado: PENDIENTE
+2026-11-15 13:57:33 | ERROR | Fallo en reserva [RES-104]: Fallo al confirmar reserva RES-104 para 'Consultoría Cloud y Microservicios'. | Causa raíz: Las asesorías requieren mínimo 2 horas y máximo 8 horas por sesión.
+2026-11-15 13:57:33 | INFO | Reserva RES-101 PROCESADA exitosamente.
+2026-11-15 13:57:33 | INFO | Revisión de liberación de recursos lista para RES-101.
+2026-11-15 13:57:33 | ERROR | Operación inválida sobre reserva procesada [RES-101]: Imposible cancelar la reserva RES-101: ya se encuentra 'PROCESADA'.
+2026-11-15 13:57:33 | INFO | Reserva RES-102 CANCELADA (provenía de estado 'CONFIRMADA').
+2026-11-15 13:57:33 | INFO | Revisión de liberación de recursos lista para RES-102.
+2026-11-15 13:57:33 | INFO | Iniciando confirmación para reserva RES-105...
+2026-11-15 13:57:33 | INFO | Reserva RES-105 CONFIRMADA | Cliente: Andrés Restrepo | Servicio: Workstation RTX 4090 | Total: $569,772.00
+2026-11-15 13:57:33 | INFO | Cierre de validación en RES-105 con estado: CONFIRMADA
+2026-11-15 13:57:33 | INFO | FIN DE EJECUCIÓN EXITOSA SIN INTERRUPCIONES
